@@ -1,8 +1,8 @@
 ---
-title: "Using geneEnrichment"
+title: "Using_geneEnrichment"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using geneEnrichment}
+  %\VignetteIndexEntry{Using_geneEnrichment}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
