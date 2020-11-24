@@ -15,8 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup echo = F}
-devtools::load_all()
-#library(geneEnrichment)
+library(geneEnrichment)
 ```
 
 Sample data:
