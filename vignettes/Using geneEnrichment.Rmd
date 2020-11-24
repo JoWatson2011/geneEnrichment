@@ -1,0 +1,69 @@
+---
+title: "Using geneEnrichment"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using geneEnrichment}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup echo = F}
+devtools::load_all()
+#library(geneEnrichment)
+```
+
+Sample data:
+```{r}
+head(sampleGenes)
+```
+
+The whole pipeline can be performed in two functions
+The first is a wrapper for the enrichR package, which can automatically simplify and visualise the results.
+1. *genes*: a vector of HGNC gene identifiers
+2. *enrichr_db*: which database you want to use for enrichment analysis, copied and pasted from <https://maayanlab.cloud/Enrichr/#stats>
+3. *simplify*: logical; defaults to TRUE. If possible for selected database, do you want to simplify terms? Reactome pathways can be filtered just to include pathways related to cellular signaling, intraceullar transport and cellular behaviours. Gene Ontology Biological Process terms can be filtered to reduce the number of semantically similar terms.
+4. *visualise*: logical; defaults to FALSE. Automatically visualise enrichment results. Alternatively you can call *visEnrichment()*.
+5. *col*: If visualise == TRUE, specify an alternative colour to fill columns. Defaults to grey.
+```{r}
+enrichment_GOCC <- calculateEnrichment(genes = sampleGenes,
+                    enrichr_db = "GO_Cellular_Component_2018",
+                    visualise = T,
+                    col = "#F9F9CB")
+enrichment_GOCC
+# Data can be accessed from ggplot object using:
+head(enrichment_GOCC$data)
+```
+```{r}
+enrichment_GOBP <- calculateEnrichment(genes = sampleGenes,
+                    enrichr_db = "GO_Biological_Process_2018",
+                    visualise = F,
+                    simplify = F)
+head(enrichment_GOBP)
+```
+
+Separately visualize results using *visEnrichment*, for example directly from enrichR
+```{r}
+library(enrichR)
+enrichment <- enrichr(sampleGenes, "KEGG_2019_Human")
+
+visEnrichment(enrichment[[1]][1:10,], col = "#cbf9e5")
+
+```
+
+
+Save image of results, predefined format ensures text is legible in output
+```{r eval = F}
+enrichment_GOCC <- calculateEnrichment(genes = sampleGenes,
+                    enrichr_db = "GO_Cellular_Component_2018",
+                    visualise = T,
+                    col = "#F9F9CB")
+saveEnrichmentVis(enrichment_GOCC, path = "GOCC.tiff")
+```
+
