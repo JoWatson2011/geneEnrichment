@@ -4,7 +4,7 @@ devtools::install_git(https://github.com/JoWatson2011/geneEnrichment, build_vign
 
 Imported packages from **CRAN**:
 * ggplot2,
-*dplyr,
+* dplyr,
 * tidy
 
 Imported packages from **BioConductor**:
