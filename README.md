@@ -11,4 +11,4 @@ Imported packages from **BioConductor**:
 * [GOSemSim](https://bioconductor.org/packages/release/bioc/html/GOSemSim.html)
 
 For details of how to use package:
-vignette("Using geneEnrichment")
+vignette("Using_geneEnrichment")
