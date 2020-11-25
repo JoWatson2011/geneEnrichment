@@ -36,7 +36,7 @@ calculateEnrichment <- function(genes, enrichr_db, simplify = T, visualise = F, 
   if(grepl("Reactome", enrichr_db)){
     df_flt <- df_flt %>%
       mutate(ID = paste0("R-HSA", gsub(".* R-HSA", "", .data$Term)),
-             Term = gsub("Homo sapiens R-HSA.*", "", .data$Term))
+             Term = gsub(" Homo sapiens R-HSA.*", "", .data$Term))
     if(simplify == T & nrow(df_flt) > 0){
       df_flt <- df_flt %>%
         filter(.data$ID %in% c(reactHier_Signl$from,
