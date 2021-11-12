@@ -24,7 +24,7 @@ calculateEnrichment <- function(genes, enrichr_db, simplify = T, visualise = F, 
       separate(.data$Term, c("Term", "GOID"), " \\(GO:") %>%
       mutate(GOID = paste0("GO:", gsub(")", "", .data$GOID)))
 
-    if(nrow(df_flt) > 0 &
+    if(nrow(df_flt) > 1 &
        simplify == T &
        grepl("GO_Biological_Process", enrichr_db)){
       colnames(df_flt)[colnames(df_flt) == "Term"] <- "TERM"
@@ -37,7 +37,7 @@ calculateEnrichment <- function(genes, enrichr_db, simplify = T, visualise = F, 
     df_flt <- df_flt %>%
       mutate(ID = paste0("R-HSA", gsub(".* R-HSA", "", .data$Term)),
              Term = gsub(" Homo sapiens R-HSA.*", "", .data$Term))
-    if(simplify == T & nrow(df_flt) > 0){
+    if(simplify == T & nrow(df_flt) > 1){
       df_flt <- df_flt %>%
         filter(.data$ID %in% c(reactHier_Signl$from,
                                reactHier_Signl$to))
